@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - "v*"
-    branches:
-      - claude/zen-hypatia-z5lwg9
   workflow_dispatch:
     inputs:
       version:
@@ -17,8 +15,8 @@ permissions:
 
 env:
   APP_NAME: PDF-Rasterizer
-  # 태그 push면 태그 이름, 수동 실행이면 입력값, 그 외에는 기본 버전
-  RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || inputs.version || 'v3.0.0' }}
+  # 태그 push면 태그 이름, 수동 실행이면 입력한 버전
+  RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || inputs.version }}
 
 jobs:
   build:
